@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import Layout from './components/Layout/Layout';
 
 class App extends Component {
   render() {
     return (
-      <div></div>
+      <div>
+        <Layout>
+          <p>Test if it is working properly</p>
+        </Layout>
+      </div>
     );
   }
 }
