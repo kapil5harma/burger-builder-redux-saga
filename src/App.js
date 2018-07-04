@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Layout from './hoc/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuiilder/BurgerBuilder';
+import Checkout from './containers/Checkout/Checkout';
 
 class App extends Component {
   // Lines added to just test that unmount gets called once BurgerBuilder is hidden.
@@ -21,6 +22,7 @@ class App extends Component {
           {/* // Lines added to just test that unmount gets called once BurgerBuilder is hidden.
           {this.state.show ? <BurgerBuilder /> : null} */}
           <BurgerBuilder />
+          <Checkout />
         </Layout>
       </div>
     );
