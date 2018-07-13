@@ -100,6 +100,19 @@ class ContactData extends Component {
       });
   };
 
+  inputChangeHandler = (event, inputIdentifier) => {
+    // console.log('event.target.value: ', event.target.value);
+    const updatedOrderForm = {
+      ...this.state.orderForm
+    };
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier]
+    };
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.orderForm) {
@@ -108,7 +121,7 @@ class ContactData extends Component {
         config: this.state.orderForm[key]
       });
     }
-    console.log('formElementsArray: ', formElementsArray);
+    // console.log('formElementsArray: ', formElementsArray);
 
     let form = (
       <form>
@@ -118,6 +131,7 @@ class ContactData extends Component {
             elementType={formElement.config.eleType}
             elementConfig={formElement.config.eleConfig}
             value={formElement.config.value}
+            changed={event => this.inputChangeHandler(event, formElement.id)}
           />
         ))}
         {/* <Input
@@ -153,7 +167,7 @@ class ContactData extends Component {
       form = <Spinner />;
     }
 
-    console.log('Inside render of ContactData.js');
+    // console.log('Inside render of ContactData.js');
     return (
       <div className={classes.ContactData}>
         <h4>Enter your Contact data:</h4>
