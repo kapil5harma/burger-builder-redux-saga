@@ -8,11 +8,73 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class ContactData extends Component {
   state = {
-    name: '',
-    email: '',
-    address: {
-      street: '',
-      postalCode: ''
+    orderForm: {
+      name: {
+        eleType: 'input',
+        eleConfig: {
+          type: 'text',
+          plaveholder: 'Your Name'
+        },
+        value: ''
+      },
+      street: {
+        eleType: 'input',
+        eleConfig: {
+          type: 'text',
+          plaveholder: 'Street'
+        },
+        value: ''
+      },
+      zipCode: {
+        eleType: 'input',
+        eleConfig: {
+          type: 'number',
+          plaveholder: 'ZIP Code'
+        },
+        value: ''
+      },
+      city: {
+        eleType: 'input',
+        eleConfig: {
+          type: 'text',
+          plaveholder: 'City'
+        },
+        value: ''
+      },
+      state: {
+        eleType: 'input',
+        eleConfig: {
+          type: 'text',
+          plaveholder: 'State'
+        },
+        value: ''
+      },
+      country: {
+        eleType: 'input',
+        eleConfig: {
+          type: 'text',
+          plaveholder: 'Country'
+        },
+        value: ''
+      },
+      email: {
+        eleType: 'input',
+        eleConfig: {
+          type: 'email',
+          plaveholder: 'Your Email'
+        },
+        value: ''
+      },
+      deliveryMethod: {
+        eleType: 'select',
+        eleConfig: {
+          options: [
+            { value: 'fastest', displayValue: 'Fastest' },
+            { value: 'cheapest', displayValue: 'Cheapest' }
+          ]
+        },
+        value: ''
+      }
     },
     loading: false
   };
@@ -23,19 +85,7 @@ class ContactData extends Component {
     this.setState({ loading: true });
     const orderData = {
       ingredients: this.props.ingredients,
-      price: this.props.price,
-      customer: {
-        name: 'Kapil',
-        address: {
-          street: 'Test Street 1',
-          zipCode: '110084',
-          city: 'Delhi',
-          state: 'Delhi',
-          country: 'India'
-        },
-        email: 'test@test.com'
-      },
-      deliveryMethod: 'fastest'
+      price: this.props.price
     };
     axios
       .post('/orders.json', orderData)
