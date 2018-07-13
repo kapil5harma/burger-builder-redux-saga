@@ -4,12 +4,12 @@ import classes from './Input.css';
 
 const input = props => {
   let inputEle = null;
-  switch (props.inputtype) {
+  switch (props.elementType) {
     case 'input':
       inputEle = (
         <input
           className={classes.InputEle}
-          {...props.eleConfig}
+          {...props.elementConfig}
           value={props.value}
         />
       );
@@ -18,7 +18,7 @@ const input = props => {
       inputEle = (
         <textarea
           className={classes.InputEle}
-          {...props.eleConfig}
+          {...props.elementConfig}
           value={props.value}
         />
       );
@@ -27,7 +27,7 @@ const input = props => {
       inputEle = (
         <input
           className={classes.InputEle}
-          {...props.eleConfig}
+          {...props.elementConfig}
           value={props.value}
         />
       );
