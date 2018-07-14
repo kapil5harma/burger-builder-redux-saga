@@ -81,14 +81,28 @@ class ContactData extends Component {
 
   orderHandler = event => {
     event.preventDefault();
-    console.log('\n[ContactData.js]\nthis.props: ', this.props);
+    // console.log('\n[ContactData.js]\nthis.props: ', this.props);
     this.setState({ loading: true });
-    const orderData = {
+    const formData = {};
+    // console.log('this.state.orderForm: ', this.state.orderForm);
+    for (let formElementIdentifier in this.state.orderForm) {
+      formData[formElementIdentifier] = this.state.orderForm[
+        formElementIdentifier
+      ].value;
+      // console.log(
+      //   `formData[${formElementIdentifier}]: `,
+      //   formData[formElementIdentifier]
+      // );
+    }
+    // console.log('formData: ', formData);
+
+    const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price
+      price: this.props.price,
+      orderData: formData
     };
     axios
-      .post('/orders.json', orderData)
+      .post('/orders.json', order)
       .then(response => {
         // console.log('response: ', response);
         this.setState({ loading: false });
@@ -124,7 +138,7 @@ class ContactData extends Component {
     // console.log('formElementsArray: ', formElementsArray);
 
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formElementsArray.map(formElement => (
           <Input
             key={formElement.id}
@@ -134,30 +148,6 @@ class ContactData extends Component {
             changed={event => this.inputChangeHandler(event, formElement.id)}
           />
         ))}
-        {/* <Input
-          inputtype="input"
-          type="text"
-          name="name"
-          placeholder="Your Name"
-        />
-        <Input
-          inputtype="input"
-          type="email"
-          name="email"
-          placeholder="Your Email"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="street"
-          placeholder="Street"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
-        /> */}
         <Button clicked={this.orderHandler} btnType="Success">
           ORDER
         </Button>
@@ -167,7 +157,6 @@ class ContactData extends Component {
       form = <Spinner />;
     }
 
-    // console.log('Inside render of ContactData.js');
     return (
       <div className={classes.ContactData}>
         <h4>Enter your Contact data:</h4>
