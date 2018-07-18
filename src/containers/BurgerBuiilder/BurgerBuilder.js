@@ -18,21 +18,11 @@ class BurgerBuilder extends Component {
   // }
 
   state = {
-    purchasing: false,
-    loading: false,
-    error: false
+    purchasing: false
   };
 
   componentDidMount = () => {
     // console.log('\n[BurgerBuilder.js]\nthis.props: ', this.props);
-    // axios
-    //   .get('https://react-burger-builder-5fa6a.firebaseio.com/ingredients.json')
-    //   .then(res => {
-    //     this.setState({ ingredients: res.data });
-    //   })
-    //   .catch(err => {
-    //     this.setState({ error: true });
-    //   });
   };
 
   purchaseHandler = () => {
@@ -99,10 +89,6 @@ class BurgerBuilder extends Component {
           purchaseContinued={this.purchaseContinueHandler}
         />
       );
-    }
-
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
     }
 
     return (
