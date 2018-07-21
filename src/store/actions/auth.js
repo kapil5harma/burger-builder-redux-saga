@@ -1,6 +1,23 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../../node_modules/axios';
 
+export const logOut = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
+
+export const checkAuthTimeOut = expiresIn => {
+  console.log('expiresIn: ', expiresIn);
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logOut());
+      // Because expireIn property returned from Firebase backend is in seconds.
+      // And, milliseconds = seconds * 1000
+    }, expiresIn * 1000);
+  };
+};
+
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START
@@ -46,10 +63,11 @@ export const auth = (email, password, isSignUp) => {
       .then(res => {
         // console.log('res: ', res);
         dispatch(authSuccess(res.data.idToken, res.data.localId));
+        dispatch(checkAuthTimeOut(res.data.expiresIn));
       })
       .catch(err => {
         // console.log('err: ', err);
-        console.log('err.response: ', err.response);
+        // console.log('err.response: ', err.response);
         dispatch(authFail(err.response.data.error));
       });
   };
