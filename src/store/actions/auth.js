@@ -7,10 +7,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = authData => {
+export const authSuccess = (idToken, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    authData: authData
+    idToken: idToken,
+    userId: userId
   };
 };
 
@@ -44,7 +45,7 @@ export const auth = (email, password, isSignUp) => {
       .post(url, authData)
       .then(res => {
         console.log('res: ', res);
-        dispatch(authSuccess(Response.data));
+        dispatch(authSuccess(res.data.idToken, res.data.localId));
       })
       .catch(err => {
         console.log('err: ', err);
