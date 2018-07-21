@@ -44,12 +44,13 @@ export const auth = (email, password, isSignUp) => {
     axios
       .post(url, authData)
       .then(res => {
-        console.log('res: ', res);
+        // console.log('res: ', res);
         dispatch(authSuccess(res.data.idToken, res.data.localId));
       })
       .catch(err => {
-        console.log('err: ', err);
-        dispatch(authFail(err));
+        // console.log('err: ', err);
+        console.log('err.response: ', err.response);
+        dispatch(authFail(err.response.data.error));
       });
   };
 };
