@@ -21,9 +21,7 @@ export const authFail = error => {
   };
 };
 
-export const auth = (email, password) => {
-  console.log('email: ', email);
-  console.log('password: ', password);
+export const auth = (email, password, isSignUp) => {
   return dispatch => {
     dispatch(authStart());
     const authData = {
@@ -31,12 +29,19 @@ export const auth = (email, password) => {
       password: password,
       returnSecureToken: true
     };
-    console.log('authData: ', authData);
+
+    const FIREBASE_API_KEY = 'AIzaSyD85gOp3lLd3s9s55F9JSCnDI6-q5qi2Vw';
+
+    //SignUp URL
+    let url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${FIREBASE_API_KEY}`;
+
+    if (!isSignUp) {
+      //SignIn URL
+      url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${FIREBASE_API_KEY}`;
+    }
+
     axios
-      .post(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyD85gOp3lLd3s9s55F9JSCnDI6-q5qi2Vw',
-        authData
-      )
+      .post(url, authData)
       .then(res => {
         console.log('res: ', res);
         dispatch(authSuccess(Response.data));
