@@ -7,7 +7,7 @@ class OrderSummary extends Component {
   // This component could be a functional component, but for debugging purposes, it is made a class based component.
 
   componentWillUpdate() {
-    console.log(' [OrderSummary] WillUpdate ');
+    // console.log(' [OrderSummary] WillUpdate ');
   }
 
   render() {

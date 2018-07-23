@@ -11,7 +11,7 @@ export const logOut = () => {
 };
 
 export const checkAuthTimeOut = expiresIn => {
-  console.log('expiresIn: ', expiresIn);
+  // console.log('expiresIn: ', expiresIn);
   return dispatch => {
     setTimeout(() => {
       dispatch(logOut());
@@ -92,7 +92,7 @@ export const setAuthRedirectPath = path => {
 export const authCheckState = () => {
   return dispatch => {
     const token = localStorage.getItem('token');
-    console.log('token: ', token);
+    // console.log('token: ', token);
     if (!token) {
       dispatch(logOut());
     } else {
