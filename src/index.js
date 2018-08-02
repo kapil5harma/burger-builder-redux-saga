@@ -9,6 +9,7 @@ import {
   combineReducers
 } from '../node_modules/redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 import './index.css';
 import App from './App';
@@ -16,6 +17,7 @@ import registerServiceWorker from './registerServiceWorker';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
+import { logOutSaga } from './store/sagas/auth';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -28,10 +30,14 @@ const rootReducer = combineReducers({
   auth: authReducer
 });
 
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
+
+sagaMiddleware.run(logOutSaga);
 
 const app = (
   <Provider store={store}>
