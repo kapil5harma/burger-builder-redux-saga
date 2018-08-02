@@ -2,22 +2,21 @@ import * as actionTypes from './actionTypes';
 import axios from '../../../node_modules/axios';
 
 export const logOut = () => {
-  // localStorage.removeItem('token');
-  // localStorage.removeItem('userId');
-  // localStorage.removeItem('expirationDate');
   return {
     type: actionTypes.AUTH_INITIATE_LOGOUT
   };
 };
 
+export const logOutSucceed = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
+
 export const checkAuthTimeOut = expiresIn => {
-  // console.log('expiresIn: ', expiresIn);
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(logOut());
-      // Because expireIn property returned from Firebase backend is in seconds.
-      // And, milliseconds = seconds * 1000
-    }, expiresIn * 1000);
+  return {
+    type: actionTypes.AUTH_CHECK_TIMEOUT,
+    expiresIn: expiresIn
   };
 };
 
