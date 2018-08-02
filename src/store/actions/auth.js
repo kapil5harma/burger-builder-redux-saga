@@ -2,11 +2,11 @@ import * as actionTypes from './actionTypes';
 import axios from '../../../node_modules/axios';
 
 export const logOut = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  localStorage.removeItem('expirationDate');
+  // localStorage.removeItem('token');
+  // localStorage.removeItem('userId');
+  // localStorage.removeItem('expirationDate');
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_INITIATE_LOGOUT
   };
 };
 
