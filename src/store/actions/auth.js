@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-// import axios from '../../../node_modules/axios';
 
 export const logOut = () => {
   return {
@@ -58,24 +57,7 @@ export const setAuthRedirectPath = path => {
 };
 
 export const authCheckState = () => {
-  return dispatch => {
-    const token = localStorage.getItem('token');
-    // console.log('token: ', token);
-    if (!token) {
-      dispatch(logOut());
-    } else {
-      const expirationDate = localStorage.getItem('expirationDate');
-      if (expirationDate < new Date()) {
-        dispatch(logOut());
-      } else {
-        const userId = localStorage.getItem('userId');
-        dispatch(authSuccess(token, userId));
-        dispatch(
-          checkAuthTimeOut(
-            (new Date(expirationDate).getTime() - new Date().getTime()) / 1000
-          )
-        );
-      }
-    }
+  return {
+    type: actionTypes.AUTH_CHECK_STATE
   };
 };
